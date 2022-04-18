@@ -2,9 +2,23 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+      "rgName": {
+        "type": "string",
+        "defaultValue": "rg-teste",
+        "metadata": {
+          "description": "Name of the resourceGroup to create"
+        }
+      },
+      "rgLocation": {
+        "type": "string",
+        "defaultValue": "eastus2",
+        "metadata": {
+          "description": "Location for the resourceGroup"
+        }
+      },
       "webAppName": {
         "type": "string",
-        "defaultValue": "Demo-GithubActions1",
+        "defaultValue": "Demo-GithubActions2",
         "minLength": 2,
         "metadata": {
           "description": "Web app name."
@@ -43,6 +57,16 @@
       "appServicePlanPortalName": "[concat('AppServicePlan-', parameters('webAppName'))]"
     },
     "resources": [
+      {
+        "type": "Microsoft.Resources/resourceGroups",
+        "apiVersion": "2019-10-01",
+        "name": "[parameters('rgName')]",
+        "location": "[parameters('rgLocation')]",
+        "tags": {
+          "Note": "subscription level deployment"
+        },
+        "properties": {}
+      },
       {
         "type": "Microsoft.Web/serverfarms",
         "apiVersion": "2020-06-01",
