@@ -43,6 +43,7 @@ jobs:
         with:
           scope: subscription 
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: rg-teste
           region: eastus2
           template: repo/Infraestrutura/infra.json
           deploymentMode: Incremental
